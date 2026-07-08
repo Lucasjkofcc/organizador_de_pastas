@@ -1,7 +1,13 @@
 import os
 import shutil
+import sys
 
-home = "/home/lucas/Downloads/"
+args = sys.argv
+if len(args) < 2:
+    # home = "/home/lucas/Downloads/"
+    home = "~/Downloads/"
+else:
+    home = args[1]
 categorias = {
     "Imagens": [".png", ".jpg", ".jpeg"],
     "Vídeos": [".mp4", ".mov"],
@@ -13,7 +19,7 @@ categorias = {
     "Executáveis": [".exe", ".msi"],
     "Pastas (Ou executaveis....)": [""],
     "Instalação": [".deb", ".rpm"],
-    "urls": [".url", ".html"]
+    "urls": [".url", ".html"],
 }
 os.chdir(home)
 pasta_downloads = os.listdir()
@@ -21,7 +27,7 @@ print(os.listdir())
 for pasta in categorias:
     if not os.path.exists(pasta):
         os.mkdir(pasta)
-        #os.mkdir("Outros")
+        # os.mkdir("Outros")
 # organiza eu acho
 for pasta, extensoes in categorias.items():
     for arquivo in pasta_downloads:
@@ -34,5 +40,5 @@ for pasta, extensoes in categorias.items():
             else:
                 shutil.move(arquivo, os.path.join(pasta, arquivo))
                 print(f"{arquivo} -> {pasta}")
-       # elif extensao not in extensoes:
-            #shutil.move(arquivo, os.path.join("Outros", arquivo))
+    # elif extensao not in extensoes:
+    # shutil.move(arquivo, os.path.join("Outros", arquivo))
